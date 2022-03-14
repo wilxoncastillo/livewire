@@ -1,0 +1,6 @@
+laravel new livewire
+composer require laravel/jetstream
+php artisan jetstream:install livewire
+
+npm i && npm run dev
+npm install npm-watch
