@@ -2,8 +2,11 @@ laravel new livewire
 composer require laravel/jetstream
 php artisan jetstream:install livewire
 
+php artisan vendor:publish --tag=jetstream-views
+
 npm i && npm run dev
 npm install npm-watch
+
 
 -------------------------
 Paso de parametros
