@@ -4,3 +4,14 @@ php artisan jetstream:install livewire
 
 npm i && npm run dev
 npm install npm-watch
+
+-------------------------
+Paso de parametros
+
+Blade
+@livewire('show-posts', ['parametro' => auth()->user()->name] )
+
+Componente
+public function mount($parametro) {
+    dd($parametro);
+}
