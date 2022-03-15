@@ -4,15 +4,15 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
-
+    
     <x-table>
         <div class="px-6 py-6 flex items-center">
             <x-jet-input type="text" wire:model='search' class="flex-1 mr-4" placeholder="Escriba lo que quiere buscar"/>
-        
+            
             @livewire('create-post')
         </div>
         @if($posts->count())
-            <table class="table">
+            <table class="table-auto">
                 <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                     <tr>
                         <th class="cursor-pointer p-2 w-20" wire:click="order('id')">
