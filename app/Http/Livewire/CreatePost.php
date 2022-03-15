@@ -22,6 +22,13 @@ class CreatePost extends Component
             'content' => $this->content,
         ]);
 
-        $this->open = false;
+        $this->reset([
+            'title',
+            'content',
+            'open'
+        ]);
+
+        $this->emitTo('show-posts','render');
+        $this->emit('alert', 'El post se creo sastifactoriamente');
     }
 }

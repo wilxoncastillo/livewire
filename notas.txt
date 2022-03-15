@@ -18,3 +18,6 @@ Componente
 public function mount($parametro) {
     dd($parametro);
 }
+
+----------------------------------------------------------------
+https://sweetalert2.github.io/
