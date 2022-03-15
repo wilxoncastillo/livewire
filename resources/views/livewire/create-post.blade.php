@@ -13,7 +13,7 @@
 
             <div class="mb-4">
                 <x-jet-label value="Titulo del post" />
-                <x-jet-input type="text" class="w-full" wire:model="title"/>
+                <x-jet-input type="text" class="w-full" wire:model.defer="title"/>
                 <x-jet-input-error for="title" />
             </div>
 
@@ -25,14 +25,15 @@
         </x-slot>
         
         <x-slot name='footer'>
-            <x-jet-secondary-button class="mr-4" wire:click="$set('open', false)">
+            <span wire:loading wire:target="save" class="mr-2">Cargando ...</span>
+            
+            <x-jet-secondary-button class="mr-4"  wire:loading.attr="disabled" wire:click="$set('open', false)" class="disabled:opacity-20">
                 Cancelar
             </x-jet-secondary-button>
             
             <x-jet-danger-button wire:click="save">
                 Crear post
             </x-jet-danger-button>
-
         </x-slot>
 
     </x-jet-dialog-modal>
