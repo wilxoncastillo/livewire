@@ -6,8 +6,10 @@
     </x-slot>
 
     <x-table>
-        <div class="px-6 py-6">
-            <x-jet-input type="text" wire:model='search' class="w-full" placeholder="Escriba lo que quiere buscar"/>
+        <div class="px-6 py-6 flex items-center">
+            <x-jet-input type="text" wire:model='search' class="flex-1 mr-4" placeholder="Escriba lo que quiere buscar"/>
+        
+            @livewire('create-post')
         </div>
         @if($posts->count())
             <table class="table">
