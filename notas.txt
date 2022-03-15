@@ -21,3 +21,18 @@ public function mount($parametro) {
 
 ----------------------------------------------------------------
 https://sweetalert2.github.io/
+
+--------------------------------------------------------
+a librería faker a veces falla con la descarga de imagen, el error exacto por el cual ocurreo eso no sabría decirles, pero si se como solucionarlo.
+
+Si faker les está dando problemas a la hora de descargar las imagenes, hagan lo siguiente.
+
+Abrán el siguiente archivo: vendor\fakerphp\faker\src\Faker\Provider\Image.php
+
+y agregen estás dos lineas de código:
+curl_setopt($ch, CURLOPT_FILE, $fp); //línea existente
+curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);//nueva línea
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);//nueva línea
+$success = curl_exec($ch) && curl_getinfo($ch, CURLINFO_HTTP_CODE) === 200;//línea existente
+
+Esto les solucionará el problema, y podrán seguir con el curso de manera normal.   
