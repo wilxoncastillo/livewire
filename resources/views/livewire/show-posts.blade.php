@@ -77,8 +77,8 @@
                         <td class="p-2">
                             <div class="text-left">{{ $post->content }}</div>
                         </td>
-                        <td class="p-2">
-                            <div class="text-left">Edit</div>
+                        <td class="">
+                            @livewire('edit-post', ['post' => $post], key($post->id))
                         </td>
                     </tr>
                     @endforeach

@@ -7,12 +7,13 @@ php artisan vendor:publish --tag=jetstream-views
 npm i && npm run dev
 npm install npm-watch
 
+php artisan storage:link
 
 -------------------------
 Paso de parametros
 
 Blade
-@livewire('show-posts', ['parametro' => auth()->user()->name] )
+@livewire('show-posts', ['parametro' => auth()->user()->name], key() )
 
 Componente
 public function mount($parametro) {

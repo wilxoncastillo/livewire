@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Post;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,7 +19,8 @@ class DatabaseSeeder extends Seeder
         Storage::makeDirectory('public/posts');
         
         // \App\Models\User::factory(10)->create();
-        //\App\Models\Post::factory(100)->create();
+
+        Post::factory(5)->create();
         $this->call(UserSeeder::class);
 
     }
