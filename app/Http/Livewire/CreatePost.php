@@ -60,4 +60,15 @@ class CreatePost extends Component
     public function updated($propertyName){
         $this->validateOnly($propertyName);
     }
+
+    public function updatingOpen() { 
+        $this->reset([
+            'title',
+            'content',
+            'image',
+        ]);
+
+        $this->identificador = rand();
+        $this->emit('resetCKEeditor');
+    }
 }
