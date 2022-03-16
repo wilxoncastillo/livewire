@@ -20,6 +20,7 @@ class ShowPosts extends Component
     public $post;
     public $identificador;
     public $image;
+    public $readyToLoad = false;
 
     protected $rules = [
         'post.title' => 'required',
@@ -35,10 +36,15 @@ class ShowPosts extends Component
 
     public function render()
     {
-        $posts = Post::where('title', 'like', '%' . $this->search .  '%')
-            ->orWhere('content', 'like', '%' . $this->search .  '%')
-            ->orderBy($this->sort, $this->direction)
-            ->paginate(10);
+        if($this->readyToLoad) {
+            $posts = Post::where('title', 'like', '%' . $this->search .  '%')
+                ->orWhere('content', 'like', '%' . $this->search .  '%')
+                ->orderBy($this->sort, $this->direction)
+                ->paginate(10);
+        }else {
+            $posts = [];
+        }
+
 
         return view('livewire.show-posts', compact('posts'));
     }
@@ -85,6 +91,10 @@ class ShowPosts extends Component
 
     public function updatingSearch() {
         $this->resetPage();
+    }
+
+    public function loadPosts() {
+        $this->readyToLoad = true;
     }
 
 

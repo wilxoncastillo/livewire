@@ -1,4 +1,4 @@
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10" wire:init="loadPosts">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
@@ -11,7 +11,7 @@
             
             @livewire('create-post')
         </div>
-        @if($posts->count())
+        @if(count($posts))
             <table class="table-auto">
                 <thead class="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                     <tr>
@@ -87,17 +87,18 @@
                     @endforeach
                 </tbody>
             </table>
+            
+            @if($posts->hasPages())
+                <div class="px-6 py-3">
+                    {{ $posts->links() }}
+                </div>
+            @endif
         @else
             <div class="px-6 py-4">
                 No hay registros con esa busqueda
             </div>
         @endif
         
-        @if($posts->hasPages())
-            <div class="px-6 py-3">
-                {{ $posts->links() }}
-            </div>
-        @endif
 
     </x-table>
 
