@@ -36,4 +36,7 @@ curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);//nueva línea
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);//nueva línea
 $success = curl_exec($ch) && curl_getinfo($ch, CURLINFO_HTTP_CODE) === 200;//línea existente
 
-Esto les solucionará el problema, y podrán seguir con el curso de manera normal.   
+Esto les solucionará el problema, y podrán seguir con el curso de manera normal. 
+
+--------------
+https://ckeditor.com/ckeditor-5/
