@@ -23,6 +23,7 @@ class EditPost extends Component
 
     public function mount(Post $post) { 
         $this->post = $post;
+        $this->identificador = rand();
     }
 
     public function render()

@@ -66,19 +66,22 @@
                     </tr>
                 </thead>
                 <tbody class="text-sm divide-y divide-gray-100">
-                    @foreach($posts as $post)
+                    @foreach($posts as $item)
                     <tr>
                         <td class="p-2">
-                            <div class="text-left">{{ $post->id }}</div>
+                            <div class="text-left">{{ $item->id }}</div>
                         </td>
                         <td class="p-2">
-                            <div class="text-left">{{ $post->title }}</div>
+                            <div class="text-left">{{ $item->title }}</div>
                         </td>
                         <td class="p-2">
-                            <div class="text-left">{{ $post->content }}</div>
+                            <div class="text-left">{{ $item->content }}</div>
                         </td>
                         <td class="">
-                            @livewire('edit-post', ['post' => $post], key($post->id))
+                            {{-- @livewire('edit-post', ['post' => $post], key($post->id)) --}}
+                            <a class="" wire:click="edit({{ $item }})">
+                                <i class="fa fa-edit btn btn-green"></i>
+                            </a>
                         </td>
                     </tr>
                     @endforeach
@@ -90,4 +93,52 @@
             </div>
         @endif
     </x-table>
+
+    {{-- Modal editar post--}}
+    <x-jet-dialog-modal wire:model="open_edit">
+        <x-slot name='title'>
+            Editar post
+        </x-slot>
+
+        <x-slot name='content'>
+            <div wire:loading wire wire:target="image" class="w-full mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">Imagen cargand ...!</strong>
+                <span class="block sm:inline">Espere un momento hasta que la imagen se haya procesado.</span>
+            </div>
+
+            @if ($image)
+                <img src="{{ $image->temporaryUrl() }}" class="mb-4">
+            @else
+                <img src="{{ Storage::url($post->image) }}" class="mb-4">
+            @endif
+
+            <div class="mb-4">
+                <x-jet-label value="Titulo del post" />
+                <x-jet-input type="text" class="w-full" wire:model="post.title" />
+                <x-jet-input-error for="post.title" />
+            </div>
+
+            <div class="mb-4">
+                <x-jet-label value="Contenido del post" />
+                <textarea rows="6" class="form-control w-full" wire:model="post.content"></textarea>
+                <x-jet-input-error for="post.content" />
+            </div>
+
+            <div>
+                <input type="file" wire:model="image" id="{{ $identificador }}"/>
+                <x-jet-input-error for="image" />
+            </div>
+        </x-slot>
+
+        <x-slot name='footer'>
+            <x-jet-secondary-button class="mr-4" wire:click="$set('open_edit', false)">
+                Cancelar
+            </x-jet-secondary-button>
+
+            <x-jet-danger-button wire:click="update" wire:loading.attr="disabled"  wire:target="update,image" class="disabled:opacity-20">
+                Actualizar post
+            </x-jet-danger-button>
+        </x-slot>
+
+    </x-jet-dialog-modal>
 </div>
