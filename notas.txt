@@ -40,3 +40,5 @@ Esto les solucionará el problema, y podrán seguir con el curso de manera norma
 
 --------------
 https://ckeditor.com/ckeditor-5/
+
+https://sweetalert2.github.io/

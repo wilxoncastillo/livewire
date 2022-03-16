@@ -75,12 +75,16 @@
                             <div class="text-left">{{ $item->title }}</div>
                         </td>
                         <td class="p-2">
-                            <div class="text-left">{{ $item->content }}</div>
+                            <div class="text-left">{!! $item->content !!}</div>
                         </td>
-                        <td class="">
+                        <td class="flex">
                             {{-- @livewire('edit-post', ['post' => $post], key($post->id)) --}}
                             <a class="" wire:click="edit({{ $item }})">
                                 <i class="fa fa-edit btn btn-green"></i>
+                            </a>
+                            
+                            <a class="ml-2" wire:click="$emit('deletePost', {{ $item->id }})">
+                                <i class="fa fa-trash btn btn-red"></i>
                             </a>
                         </td>
                     </tr>
@@ -150,4 +154,34 @@
 
     </x-jet-dialog-modal>
 
+    @push('js')
+
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+            
+            Livewire.on('deletePost', postId => {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Livewire.emitTo('show-posts', 'delete', postId);
+
+                        Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                        )
+                    }
+                })
+            });
+
+        </script>
+    @endpush
+            
  </div>

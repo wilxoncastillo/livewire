@@ -27,7 +27,10 @@ class ShowPosts extends Component
         'post.content' => 'required',
     ];
 
-    protected $listeners = ['render' => 'render'];
+    protected $listeners = [
+        'render' => 'render', 
+        'delete',
+    ];
 
     public function mount() { 
         $this->post = new Post();
@@ -95,6 +98,12 @@ class ShowPosts extends Component
 
     public function loadPosts() {
         $this->readyToLoad = true;
+    }
+
+    public function delete(Post $post) {
+        $post->delete();
+
+        $this->emit('alert', 'El post se borro sastifactoriamente');
     }
 
 
