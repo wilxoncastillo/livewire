@@ -83,5 +83,9 @@ class ShowPosts extends Component
         $this->emit('alert', 'El post se actualizo sastifactoriamente');
     }
 
+    public function updatingSearch() {
+        $this->resetPage();
+    }
+
 
 }
