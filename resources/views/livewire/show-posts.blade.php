@@ -7,6 +7,16 @@
 
     <x-table>
         <div class="px-6 py-6 flex items-center">
+            <div class="flex items-center">
+                <span class="mr-2">Mostrar</span>
+                <select wire:model="pages" class="mr-4 form-control">
+                    <option value=10>10</option>
+                    <option value=25>25</option>
+                    <option value=50>50</option>
+                    <option value=100>100</option>
+                </select>
+            </div>
+
             <x-jet-input type="text" wire:model='search' class="flex-1 mr-4" placeholder="Escriba lo que quiere buscar"/>
             
             @livewire('create-post')
@@ -132,7 +142,15 @@
 
             <div class="mb-4">
                 <x-jet-label value="Contenido del post" />
-                <textarea rows="6" class="form-control w-full" wire:model="post.content"></textarea>
+                <div wire:ignore {{-- wire:key="edit-{{ rand() }}" --}}>
+                    <textarea 
+                        rows="6" 
+                        class="form-control w-full"
+                        wire:model="post.content" 
+                        id="editor2">
+                        {{ $post->content }}
+                    </textarea>
+                </div>
                 <x-jet-input-error for="post.content" />
             </div>
 
@@ -180,6 +198,17 @@
                     }
                 })
             });
+
+            ClassicEditor
+                .create( document.querySelector( '#editor2' ) )
+                .then(function(editor){
+                    editor.model.document.on('change:data', () =>{
+                        @this.set('post.content', editor.getData());
+                    });
+                })
+                .catch( error => {
+                    console.error( error );
+                } );
 
         </script>
     @endpush

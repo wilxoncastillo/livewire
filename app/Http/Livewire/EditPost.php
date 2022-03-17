@@ -28,6 +28,7 @@ class EditPost extends Component
 
     public function render()
     {
+        dd('xxxx');
         return view('livewire.edit-post');
     }
 

@@ -21,6 +21,15 @@ class ShowPosts extends Component
     public $identificador;
     public $image;
     public $readyToLoad = false;
+    public $pages = 10;
+
+    public $queryString = [
+        'pages' => ['except' => '10'],
+        'sort' => ['except' => 'id'],
+        'direction' => ['except' => 'desc'],
+        'search' => ['except' => '']
+    ];
+
 
     protected $rules = [
         'post.title' => 'required',
@@ -43,7 +52,7 @@ class ShowPosts extends Component
             $posts = Post::where('title', 'like', '%' . $this->search .  '%')
                 ->orWhere('content', 'like', '%' . $this->search .  '%')
                 ->orderBy($this->sort, $this->direction)
-                ->paginate(10);
+                ->paginate($this->pages);
         }else {
             $posts = [];
         }
@@ -106,5 +115,6 @@ class ShowPosts extends Component
         $this->emit('alert', 'El post se borro sastifactoriamente');
     }
 
+    
 
 }

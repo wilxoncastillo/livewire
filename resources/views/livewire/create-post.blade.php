@@ -1,5 +1,5 @@
 <div>
-    <x-jet-danger-button class="ml-4" wire:click="$set('open', true)">
+    <x-jet-danger-button class="" wire:click="$set('open', true)">
         Crear nuevo post
     </x-jet-danger-button>
 
